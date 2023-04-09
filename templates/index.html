@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To-Do List</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-top: 50px;
+      }
+
+      form {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: none;
+        margin-right: 10px;
+      }
+
+      button[type="submit"] {
+        padding: 10px;
+        font-size: 16px;
+        background-color: #4caf50;
+        color: #fff;
+        border-radius: 5px;
+        border: none;
+      }
+
+      ul {
+        list-style-type: none;
+        margin-top: 30px;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+        width: 50%;
+      }
+
+      li a {
+        color: #4caf50;
+        text-decoration: none;
+      }
+
+      li a:hover {
+        text-decoration: underline;
+      }
+
+      li[style="text-decoration: line-through"] {
+        background-color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>To-Do List</h1>
+    <form method="POST" action="/add">
+      <input type="text" name="description" placeholder="Add a new task" />
+      <button type="submit">Add</button>
+    </form>
+    <ul>
+      {% for row in rows %}
+      <li {% if row[2] %}style="text-decoration: line-through" {% endif %}>
+        {{ row[1] }} {% if not row[2] %}
+        <a href="/complete/{{ row[0] }}">Complete</a>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
